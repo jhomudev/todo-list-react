@@ -6,12 +6,19 @@ export function useTasks () {
     return tasksLS ? JSON.parse(tasksLS) : []
   })
 
+  const [error, setError] = useState(null)
+
   function saveTasksLS ({ newValueTasks }) {
     localStorage.setItem('tasks', JSON.stringify(newValueTasks))
   }
 
   function createTask ({ descrip }) {
-    if (descrip === '') return
+    if (descrip === '') {
+      setError('Write something')
+      return
+    }
+
+    setError(null)
 
     const newTask = {
       id: crypto.randomUUID(),
@@ -40,5 +47,5 @@ export function useTasks () {
     saveTasksLS({ newValueTasks })
   }
 
-  return { tasks, updateTasks, createTask, deleteTask, toggleCheckTask }
+  return { error, tasks, updateTasks, createTask, deleteTask, toggleCheckTask, saveTasksLS }
 }

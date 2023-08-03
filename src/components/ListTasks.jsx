@@ -29,7 +29,7 @@ function TasksToDo ({ tasks, deleteTask, toggleCheckTask }) {
 }
 
 function ListTasks ({ tasks, deleteTask, toggleCheckTask }) {
-  const [show, setShow] = useState(false)
+  const [show, setShow] = useState(true)
 
   const countTasksDone = tasks.filter((task) => task.isDone === true).length
   const countTasksToDo = tasks.filter((task) => task.isDone === false).length
@@ -40,7 +40,7 @@ function ListTasks ({ tasks, deleteTask, toggleCheckTask }) {
 
   return (
     <>
-      <div className='list pl-2 pb-1 border-l-purple-800 border-b-purple-800 border-l-[1px] border-b-[1px] rounded-[0_0_0_5px]'>
+      <div className='list shadow-sm pl-2 pb-1 border-l-purple-800 border-b-purple-800 border-l-[1px] border-b-[1px] rounded-[0_0_0_5px]'>
         <div className='flex items-center'>
           <h3 className='font-semibold text-purple-800'>To do</h3>
           <span className='bg-purple-200 text-purple-800 p-[2px_6px_2px_6px] rounded-full ml-auto text-xs font-semibold'>{countTasksToDo}</span>
@@ -49,7 +49,7 @@ function ListTasks ({ tasks, deleteTask, toggleCheckTask }) {
           <TasksToDo tasks={tasks} deleteTask={deleteTask} toggleCheckTask={toggleCheckTask} />
         </ul>
       </div>
-      <div className='list pl-2 pb-1 border-l-green-800 border-b-green-800 border-l-[1px] border-b-[1px] rounded-[0_0_0_5px]'>
+      <div className='list shadow-sm pl-2 pb-1 border-l-green-800 border-b-green-800 border-l-[1px] border-b-[1px] rounded-[0_0_0_5px]'>
         <div className='flex items-center'>
           <h3 className='font-semibold text-green-800 flex items-center gap-3' onClick={handleShow}>Done <CaretDown className={`cursor-pointer transition-all duration-500 ${show ? 'rotate-180' : ''}`} /></h3>
           <span className='bg-green-200 text-green-800 p-[2px_6px_2px_6px] rounded-full ml-auto text-xs font-semibold'>{countTasksDone}</span>
@@ -58,7 +58,6 @@ function ListTasks ({ tasks, deleteTask, toggleCheckTask }) {
           <TasksDone tasks={tasks} deleteTask={deleteTask} toggleCheckTask={toggleCheckTask} />
         </ul>
       </div>
-
     </>
 
   )
