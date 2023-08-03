@@ -1,0 +1,18 @@
+[
+  {
+    "descrip": "Tarea 1",
+    "isDone": false
+  },
+  {
+    "descrip": "Tarea 2",
+    "isDone": true
+  },
+  {
+    "descrip": "Tarea 3",
+    "isDone": false
+  },
+  {
+    "descrip": "Tarea 4",
+    "isDone": true
+  }
+]
