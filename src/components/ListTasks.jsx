@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import TaskItem from './TaskItem'
 import { CaretDown } from '@phosphor-icons/react'
+import { useTasks } from '../hooks/useTasks'
 
-function TasksDone ({ tasks, deleteTask, toggleCheckTask }) {
+function TasksDone () {
+  const { tasks, deleteTask, toggleCheckTask } = useTasks()
   const tasksDone = tasks.filter((task) => task.isDone === true)
   const hasTasks = tasksDone.length > 0
   return hasTasks
@@ -15,7 +17,8 @@ function TasksDone ({ tasks, deleteTask, toggleCheckTask }) {
     : (<p className='text-sm text-gray-600 p-2'>No tasks done</p>)
 }
 
-function TasksToDo ({ tasks, deleteTask, toggleCheckTask }) {
+function TasksToDo () {
+  const { tasks, deleteTask, toggleCheckTask } = useTasks()
   const tasksToDo = tasks.filter((task) => task.isDone === false)
   const hasTasks = tasksToDo.length > 0
   return hasTasks
@@ -28,7 +31,9 @@ function TasksToDo ({ tasks, deleteTask, toggleCheckTask }) {
     : (<p className='text-sm text-gray-600 p-2'>No tasks to do</p>)
 }
 
-function ListTasks ({ tasks, deleteTask, toggleCheckTask }) {
+function ListTasks () {
+  const { tasks } = useTasks()
+
   const [show, setShow] = useState(true)
 
   const countTasksDone = tasks.filter((task) => task.isDone === true).length
@@ -46,7 +51,7 @@ function ListTasks ({ tasks, deleteTask, toggleCheckTask }) {
           <span className='bg-purple-200 text-purple-800 p-[2px_6px_2px_6px] rounded-full ml-auto text-xs font-semibold'>{countTasksToDo}</span>
         </div>
         <ul className='list grid'>
-          <TasksToDo tasks={tasks} deleteTask={deleteTask} toggleCheckTask={toggleCheckTask} />
+          <TasksToDo tasks={tasks} />
         </ul>
       </div>
       <div className='list shadow-sm pl-2 pb-1 border-l-green-800 border-b-green-800 border-l-[1px] border-b-[1px] rounded-[0_0_0_5px]'>
@@ -55,7 +60,7 @@ function ListTasks ({ tasks, deleteTask, toggleCheckTask }) {
           <span className='bg-green-200 text-green-800 p-[2px_6px_2px_6px] rounded-full ml-auto text-xs font-semibold'>{countTasksDone}</span>
         </div>
         <ul className={`list grid h-auto ${show ? 'max-h-80' : 'max-h-0'} overflow-hidden transition-all duration-300`}>
-          <TasksDone tasks={tasks} deleteTask={deleteTask} toggleCheckTask={toggleCheckTask} />
+          <TasksDone tasks={tasks} />
         </ul>
       </div>
     </>

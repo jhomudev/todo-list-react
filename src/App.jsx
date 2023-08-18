@@ -5,7 +5,7 @@ import { useTasks } from './hooks/useTasks'
 import { useState } from 'react'
 
 function App () {
-  const { error, tasks, updateTasks, deleteTask, createTask, toggleCheckTask, saveTasksLS } = useTasks()
+  const { createTask, clearTasks, error } = useTasks()
   const [formNewtask, setFormNewtask] = useState('')
 
   function handleSubmit (e) {
@@ -23,12 +23,6 @@ function App () {
     setFormNewtask(newValue)
   }
 
-  function handleClearTasks () {
-    const newValueTasks = []
-    updateTasks(newValueTasks)
-    saveTasksLS({ newValueTasks })
-  }
-
   return (
     <>
       <main className='w-full min-h-screen bg-gray-100 grid place-items-center'>
@@ -40,8 +34,8 @@ function App () {
             <button className='bg-blue-600 hover:bg-blue-800 p-2 text-white'><Plus size={23} weight='bold' /></button>
           </form>
           <p className={`-mt-2 text-xs text-red-600 italic font-semibold ${error ? 'block' : 'hidden'}`}>{error}</p>
-          <ListTasks tasks={tasks} deleteTask={deleteTask} toggleCheckTask={toggleCheckTask} />
-          <button onClick={handleClearTasks} className='bg-red-600 hover:bg-red-700 p-2 rounded-sm text-white flex items-center justify-center gap-3'>Clear all tasks<Trash size={20} /></button>
+          <ListTasks />
+          <button onClick={clearTasks} className='bg-red-600 hover:bg-red-700 p-2 rounded-sm text-white flex items-center justify-center gap-3'>Clear all tasks<Trash size={20} /></button>
         </div>
       </main>
     </>
